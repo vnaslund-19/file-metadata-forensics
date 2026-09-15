@@ -1,0 +1,5 @@
+pypdf
+python-docx
+openpyxl
+python-pptx
+oletools
