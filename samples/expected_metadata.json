@@ -1,0 +1,134 @@
+{
+  "_about": {
+    "recorded": "2026-09-08",
+    "source": "Read directly out of docProps/core.xml and docProps/app.xml with zipfile, and out of the PDFs with pdfinfo. Not produced by the extraction code in src/, so it can be used to check that code.",
+    "generated_samples": "samples/generated/ is not listed here. Its known values are the constants at the top of tests/make_generated_samples.py.",
+    "pdf_dates": "PDF creation/modification dates are stamped at export time and are not fixed values, so they are not recorded as expected values."
+  },
+
+  "sample.docx": {
+    "type": "docx",
+    "core": {
+      "title": "DocuTestTitle",
+      "subject": "TestySub",
+      "creator": "Test Testsson",
+      "keywords": "Digital Forensics, Test, Metadata, Sample",
+      "description": "Im just writing random words",
+      "lastModifiedBy": "Victor Naslund Cuesta",
+      "revision": "3",
+      "lastPrinted": "2026-09-08T10:17:00Z",
+      "created": "2026-09-08T10:18:00Z",
+      "modified": "2026-09-08T10:19:00Z",
+      "category": "Categorical Success"
+    },
+    "app": {
+      "Application": "Microsoft Office Word",
+      "AppVersion": "16.0000",
+      "Template": "Normal.dotm",
+      "Manager": "Jose Mourinho",
+      "Company": "DFComp AB",
+      "HyperlinkBase": "smb://DFCOMP-FS01/projects/forensics/"
+    },
+    "hyperlinks": ["https://example.com/link-target"],
+    "notes": [
+      "The only sample with a hyperlink base set.",
+      "lastPrinted (10:17) is earlier than created (10:18). The file was re-created after being printed, which resets created and the revision counter but keeps lastPrinted."
+    ]
+  },
+
+  "sample.xlsx": {
+    "type": "xlsx",
+    "core": {
+      "title": "OpeningSheet",
+      "subject": "Basic opening",
+      "creator": "Ghost Writer",
+      "keywords": "Spreadsheet, chess, sample, test",
+      "description": "Randomly (or not) inserted values into excel spreadsheet for metadata extraction testing",
+      "lastModifiedBy": "Victor Naslund Cuesta",
+      "revision": null,
+      "created": "2026-09-08T09:48:25Z",
+      "modified": "2026-09-08T09:54:32Z",
+      "category": "TikiTi"
+    },
+    "app": {
+      "Application": "Microsoft Macintosh Excel",
+      "AppVersion": "16.0300",
+      "Manager": "Josep",
+      "Company": "CatalaComp",
+      "HyperlinkBase": ""
+    },
+    "hyperlinks": [],
+    "notes": [
+      "Excel writes no revision element at all, so this is the sample to test missing metadata against."
+    ]
+  },
+
+  "sample.pptx": {
+    "type": "pptx",
+    "core": {
+      "title": "SamplePres",
+      "subject": "Unnecessary info",
+      "creator": "PowerPuff",
+      "keywords": "Sample, presentation, test, forensics",
+      "description": "Sample presentation created solely for forensic metadata analysis",
+      "lastModifiedBy": "Victor Naslund Cuesta",
+      "revision": "3",
+      "created": "2026-09-08T09:54:41Z",
+      "modified": "2026-09-08T09:57:26Z",
+      "category": "Random data"
+    },
+    "app": {
+      "Application": "Microsoft Macintosh PowerPoint",
+      "AppVersion": "16.0000",
+      "Manager": "Steve",
+      "Company": "Company123",
+      "HyperlinkBase": ""
+    },
+    "hyperlinks": [],
+    "notes": [
+      "A slide is titled \"Click here\" but carries no external relationship, so there is no hyperlink to find."
+    ]
+  },
+
+  "sample_msft.pdf": {
+    "type": "pdf",
+    "source": "sample.docx, saved from Word as \"Best for electronic distribution and accessibility\"",
+    "docinfo": {
+      "Title": "DocuTestTitle",
+      "Subject": "TestySub",
+      "Keywords": "Digital Forensics, Test, Metadata, Sample",
+      "Author": "Test Testsson",
+      "Creator": "Microsoft Word",
+      "Producer": null
+    },
+    "pages": 1,
+    "pdf_version": "1.7",
+    "xmp_metadata_stream": true,
+    "tagged": true,
+    "notes": [
+      "Word's own exporter carries title, subject, keywords and author across.",
+      "Company, Manager, Category, revision and lastModifiedBy do not survive; they have no equivalent in PDF."
+    ]
+  },
+
+  "sample_printing.pdf": {
+    "type": "pdf",
+    "source": "sample.docx, saved from Word as \"Best for printing\"",
+    "docinfo": {
+      "Title": null,
+      "Subject": null,
+      "Keywords": null,
+      "Author": null,
+      "Creator": null,
+      "Producer": "macOS Version 14.6.1 (Build 23G93) Quartz PDFContext"
+    },
+    "pages": 1,
+    "pdf_version": "1.3",
+    "xmp_metadata_stream": false,
+    "tagged": false,
+    "notes": [
+      "This route goes through the macOS print pipeline, which rebuilds the file and drops every document property. Only the timestamps and the producer string remain.",
+      "The producer string identifies the operating system and build number of the machine that made the file."
+    ]
+  }
+}
