@@ -1,0 +1,20 @@
+*.md
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Generated scan output (keep the directory and saved reference output)
+results/*
+!results/.gitkeep
+!results/reference/
+
+.DS_Store
+~$*
