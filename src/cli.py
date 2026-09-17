@@ -4,25 +4,7 @@ import argparse
 import sys
 from pathlib import Path
 
-from . import scan
-
-
-def report(result):
-    print(f"{result['file']['name']}  ({result['type'] or 'unsupported'})")
-    print_section("file", result["file"])
-    print_section("document metadata", result["metadata"])
-    for warning in result["warnings"]:
-        print(f"  warning: {warning}")
-
-
-def print_section(heading, values):
-    present = {name: value for name, value in values.items() if value not in (None, "")}
-    if not present:
-        return
-    print(f"  {heading}:")
-    width = max(len(name) for name in present)
-    for name, value in present.items():
-        print(f"    {name:<{width}}  {value}")
+from . import output, scan
 
 
 def build_parser():
@@ -34,6 +16,9 @@ def build_parser():
     parser.add_argument(
         "-r", "--recursive", action="store_true", help="also scan subdirectories"
     )
+    formats = parser.add_mutually_exclusive_group()
+    formats.add_argument("--json", action="store_true", help="print results as JSON")
+    formats.add_argument("--csv", action="store_true", help="print results as CSV")
     return parser
 
 
@@ -45,28 +30,18 @@ def main(argv=None):
         return 1
 
     if args.path.is_file():
-        report(scan.extract_metadata(args.path))
-        return 0
+        files, unsupported, unreadable = [args.path], [], []
+    else:
+        files, unsupported, unreadable = scan.find_files(args.path, args.recursive)
 
-    supported, unsupported, unreadable = scan.find_files(args.path, args.recursive)
-    for path in supported:
-        report(scan.extract_metadata(path))
-        print()
+    results = [scan.extract_metadata(path) for path in files]
+    skipped = [scan.skipped(path, "unsupported file type") for path in unsupported]
+    skipped += [scan.skipped(path, "could not open folder") for path in unreadable]
 
-    print_paths("skipped, unsupported file type:", unsupported)
-    print_paths("could not open folder:", unreadable)
-
-    print(
-        f"scanned: {len(supported)}, skipped: {len(unsupported)}, "
-        f"folders not opened: {len(unreadable)}"
-    )
+    if args.json:
+        output.print_json(results + skipped)
+    elif args.csv:
+        output.print_csv(results + skipped)
+    else:
+        output.print_text(results, skipped)
     return 0
-
-
-def print_paths(heading, paths):
-    if not paths:
-        return
-    print(heading)
-    for path in paths:
-        print(f"  {path}")
-    print()

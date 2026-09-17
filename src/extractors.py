@@ -19,6 +19,30 @@ import openpyxl
 import pptx
 import pypdf
 
+# Every result has all of these. Fields a format doesn't have are None.
+METADATA_FIELDS = [
+    "title",
+    "subject",
+    "author",
+    "keywords",
+    "comments",
+    "category",
+    "last_modified_by",
+    "revision",
+    "created",
+    "modified",
+    "last_printed",
+    "application",
+    "producer",
+    "pages",
+    "pdf_version",
+    "has_xmp_metadata",
+    "content_status",
+    "identifier",
+    "language",
+    "version",
+]
+
 # Core property names shared by DOCX and PPTX, as python-docx and python-pptx
 # spell them.
 OOXML_CORE_PROPERTIES = [
@@ -60,22 +84,20 @@ XLSX_CORE_PROPERTIES = {
 
 
 def extract(path, file_type):
-    """Return (metadata, warnings) for one file.
-
-    A file that cannot be read produces an empty result and a warning rather
-    than an exception, so that scanning a directory is not stopped by one bad
-    file.
-    """
+    """Return (metadata, warnings). A file that can't be read gives a warning, not a crash."""
     extractors = {
         "docx": extract_docx,
         "xlsx": extract_xlsx,
         "pptx": extract_pptx,
         "pdf": extract_pdf,
     }
+    metadata = dict.fromkeys(METADATA_FIELDS)
     try:
-        return extractors[file_type](path)
+        found, warnings = extractors[file_type](path)
     except Exception as error:
-        return {}, [f"could not read {file_type} metadata: {error}"]
+        return metadata, [f"could not read {file_type} metadata: {error}"]
+    metadata.update(found)
+    return metadata, warnings
 
 
 def extract_docx(path):
@@ -100,6 +122,9 @@ def extract_xlsx(path):
         metadata = {}
         for name, source_name in XLSX_CORE_PROPERTIES.items():
             metadata[name] = clean(getattr(props, source_name, None))
+        # openpyxl gives the revision as text, python-docx and python-pptx as a number.
+        if metadata["revision"] and metadata["revision"].isdigit():
+            metadata["revision"] = int(metadata["revision"])
         return metadata, []
     finally:
         workbook.close()

@@ -14,6 +14,8 @@ SUPPORTED_EXTENSIONS = {".docx", ".xlsx", ".pptx", ".pdf"}
 
 READ_SIZE = 65536
 
+FILESYSTEM_FIELDS = ["name", "extension", "size_bytes", "created", "modified", "accessed"]
+
 
 def file_type(path):
     """Short name for the file type, or None if it is not one we handle."""
@@ -37,12 +39,10 @@ def describe(path):
     stat = path.stat()
     return {
         "name": path.name,
-        "path": str(path.resolve()),
         "extension": path.suffix.lower(),
         "size_bytes": stat.st_size,
-        "sha256": sha256(path),
-        "modified": _as_utc(stat.st_mtime),
         "created": _as_utc(getattr(stat, "st_birthtime", None)),
+        "modified": _as_utc(stat.st_mtime),
         "accessed": _as_utc(stat.st_atime),
     }
 
