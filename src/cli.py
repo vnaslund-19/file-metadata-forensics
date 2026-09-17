@@ -4,26 +4,7 @@ import argparse
 import sys
 from pathlib import Path
 
-from . import extractors, fileinfo
-
-
-def analyse(path):
-    """Filesystem facts and document metadata for one file."""
-    file_type = fileinfo.file_type(path)
-    result = {
-        "file": fileinfo.describe(path),
-        "type": file_type,
-        "metadata": {},
-        "warnings": [],
-    }
-    if file_type is None:
-        result["warnings"].append("unsupported file type")
-        return result
-
-    metadata, warnings = extractors.extract(path, file_type)
-    result["metadata"] = metadata
-    result["warnings"] = warnings
-    return result
+from . import scan
 
 
 def report(result):
@@ -49,7 +30,10 @@ def build_parser():
         prog="python -m src",
         description="Extract metadata from Office documents, PDFs and related files.",
     )
-    parser.add_argument("path", type=Path, help="file to analyse")
+    parser.add_argument("path", type=Path, help="file or directory to scan")
+    parser.add_argument(
+        "-r", "--recursive", action="store_true", help="also scan subdirectories"
+    )
     return parser
 
 
@@ -59,9 +43,30 @@ def main(argv=None):
     if not args.path.exists():
         print(f"error: no such file or directory: {args.path}", file=sys.stderr)
         return 1
-    if args.path.is_dir():
-        print("error: directory scanning is not implemented yet", file=sys.stderr)
-        return 1
 
-    report(analyse(args.path))
+    if args.path.is_file():
+        report(scan.extract_metadata(args.path))
+        return 0
+
+    supported, unsupported, unreadable = scan.find_files(args.path, args.recursive)
+    for path in supported:
+        report(scan.extract_metadata(path))
+        print()
+
+    print_paths("skipped, unsupported file type:", unsupported)
+    print_paths("could not open folder:", unreadable)
+
+    print(
+        f"scanned: {len(supported)}, skipped: {len(unsupported)}, "
+        f"folders not opened: {len(unreadable)}"
+    )
     return 0
+
+
+def print_paths(heading, paths):
+    if not paths:
+        return
+    print(heading)
+    for path in paths:
+        print(f"  {path}")
+    print()
