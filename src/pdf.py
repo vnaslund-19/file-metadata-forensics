@@ -9,11 +9,10 @@ by where it is stored, never read out or run.
 """
 
 import contextlib
+import datetime
 import logging
 
 import pypdf
-
-from .extractors import clean
 
 
 def inspect(path):
@@ -139,6 +138,20 @@ def find_javascript(reader, warnings):
 def resolve(value):
     """Follow a reference to the object it points at."""
     return value.get_object() if value is not None else None
+
+
+def clean(value):
+    """Normalise a value pypdf returns."""
+    if value is None:
+        return None
+    if isinstance(value, datetime.datetime):
+        if value.tzinfo is None:
+            value = value.replace(tzinfo=datetime.timezone.utc)
+        return value.isoformat()
+    if isinstance(value, str):
+        value = value.strip()
+        return value or None
+    return value
 
 
 class MessageCollector(logging.Handler):

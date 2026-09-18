@@ -3,9 +3,40 @@
 import zipfile
 from pathlib import Path
 
-from . import extractors, fileinfo, ooxml, pdf
+from . import fileinfo, ooxml, pdf
 
-OOXML_TYPES = ("docx", "xlsx", "pptx")
+# Every result carries all of these, set to None where a format has no such
+# thing. A consistent shape is what makes the JSON and CSV output comparable
+# between file types.
+METADATA_FIELDS = [
+    "title",
+    "subject",
+    "author",
+    "keywords",
+    "comments",
+    "category",
+    "last_modified_by",
+    "revision",
+    "created",
+    "modified",
+    "last_printed",
+    "application",
+    "app_version",
+    "company",
+    "manager",
+    "hyperlink_base",
+    "template",
+    "producer",
+    "pages",
+    "pdf_version",
+    "has_xmp_metadata",
+    "document_id",
+    "instance_id",
+    "content_status",
+    "identifier",
+    "language",
+    "version",
+]
 
 
 def find_files(directory, recursive=False):
@@ -35,7 +66,7 @@ def new_result(path):
         "type": fileinfo.file_type(path),
         "sha256": None,
         "filesystem": dict.fromkeys(fileinfo.FILESYSTEM_FIELDS),
-        "metadata": dict.fromkeys(extractors.METADATA_FIELDS),
+        "metadata": dict.fromkeys(METADATA_FIELDS),
         # None means the file was never checked for these, an empty list means
         # it was checked and none were found.
         "hyperlinks": None,
@@ -70,12 +101,8 @@ def extract_metadata(path):
 
     if result["type"] == "pdf":
         add_pdf_details(result, path)
-        return result
-
-    from_library, result["warnings"] = extractors.extract(path, result["type"])
-    if from_library is not None:
-        result["metadata"] = from_library
-    add_container_details(result, path, from_library)
+    else:
+        add_office_details(result, path)
     return result
 
 
@@ -94,31 +121,17 @@ def add_pdf_details(result, path):
     result["warnings"] += warnings
 
 
-def add_container_details(result, path, from_library):
-    """Add what the ZIP container holds.
-
-    Where the library also read the properties, the two readings are compared.
-    Where it could not open the file, the properties come from the XML instead.
-    """
+def add_office_details(result, path):
+    """Add everything an Office document holds: properties, links and archive entries."""
     try:
         details, warnings = ooxml.inspect(path)
     except (OSError, zipfile.BadZipFile) as error:
         result["warnings"].append(f"could not read the archive: {error}")
         return
 
-    result["metadata"].update(
-        {name: value or None for name, value in details["app_properties"].items()}
-    )
+    result["metadata"].update(details["metadata"])
     result["hyperlinks"] = details["hyperlinks"]
     result["external_relationships"] = details["external_relationships"]
     result["embedded_objects"] = details["embedded_objects"]
     result["macros"] = details["macros"]
     result["warnings"] += warnings
-
-    if from_library is None:
-        result["metadata"].update(ooxml.as_library_values(details["core_properties"]))
-        result["warnings"].append("core properties were read from the XML, not the library")
-    else:
-        result["warnings"] += ooxml.compare_with_library(
-            details["core_properties"], result["metadata"]
-        )

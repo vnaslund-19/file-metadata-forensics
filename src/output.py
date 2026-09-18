@@ -5,7 +5,7 @@ import json
 import sys
 from pathlib import Path
 
-from . import extractors, fileinfo
+from . import fileinfo, scan
 
 LIST_FIELDS = [
     "hyperlinks",
@@ -18,7 +18,7 @@ LIST_FIELDS = [
 CSV_COLUMNS = (
     ["file", "type", "sha256"]
     + [f"filesystem.{name}" for name in fileinfo.FILESYSTEM_FIELDS]
-    + [f"metadata.{name}" for name in extractors.METADATA_FIELDS]
+    + [f"metadata.{name}" for name in scan.METADATA_FIELDS]
     + LIST_FIELDS
     + ["warnings"]
 )

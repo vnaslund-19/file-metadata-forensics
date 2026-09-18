@@ -1,9 +1,11 @@
-"""Read metadata straight out of the ZIP structure of DOCX, XLSX and PPTX files.
+"""Read Office documents, which are ZIP archives full of XML.
 
-These formats are ZIP archives full of XML. Reading that XML directly reaches
-fields the format libraries never expose, such as Company, Manager, Hyperlink
-base and external links, and gives a second reading of the core properties to
-check the libraries against.
+Everything comes from the two property files and the relationship files, read
+straight out of the archive. Python-docx, openpyxl or python-pptx are not used,
+on purpose. Reading the XML reaches fields none of them expose, such as Company, 
+Manager and Hyperlink base. It reports values as they are written rather than 
+as a library interprets them. And it works on macro-enabled files, which those 
+libraries refuse to open.
 """
 
 import zipfile
@@ -11,6 +13,8 @@ from xml.etree import ElementTree
 
 CORE_PART = "docProps/core.xml"
 APP_PART = "docProps/app.xml"
+
+DATE_FIELDS = {"created", "modified", "last_printed"}
 
 # Property files are small. A very large one is more likely an attempt to
 # overload the XML parser than a real document.
@@ -55,9 +59,10 @@ def inspect(path):
         if CORE_PART not in names:
             warnings.append(f"no {CORE_PART} in the archive")
         hyperlinks, external = read_external_relationships(package, names, warnings)
+        properties = read_properties(package, CORE_PART, CORE_NAMES, warnings)
+        properties.update(read_properties(package, APP_PART, APP_NAMES, warnings))
         details = {
-            "core_properties": read_properties(package, CORE_PART, CORE_NAMES, warnings),
-            "app_properties": read_properties(package, APP_PART, APP_NAMES, warnings),
+            "metadata": properties,
             "hyperlinks": hyperlinks,
             "external_relationships": external,
             "embedded_objects": [name for name in names if is_embedded_object(name)],
@@ -75,8 +80,18 @@ def read_properties(package, part, names, warnings):
     for element in root:
         tag = element.tag.split("}")[-1]
         if tag in names:
-            values[names[tag]] = (element.text or "").strip()
+            name = names[tag]
+            values[name] = as_value(name, (element.text or "").strip())
     return values
+
+
+def as_value(name, text):
+    """An empty element means nothing was set. Values are otherwise left as written."""
+    if not text:
+        return None
+    if name in DATE_FIELDS and text.endswith("Z"):
+        return text[:-1] + "+00:00"
+    return text
 
 
 def read_external_relationships(package, names, warnings):
@@ -139,37 +154,3 @@ def parse_part(package, name, warnings):
         return None
 
 
-def as_library_values(core):
-    """Core properties in the same form the libraries return them."""
-    values = {}
-    for name, raw in core.items():
-        if not raw:
-            values[name] = None
-        elif name == "revision" and raw.isdigit():
-            values[name] = int(raw)
-        elif raw.endswith("Z"):
-            values[name] = raw[:-1] + "+00:00"
-        else:
-            values[name] = raw
-    return values
-
-
-def compare_with_library(raw, metadata):
-    """Report fields where core.xml and the format library disagree."""
-    warnings = []
-    for name, raw_value in raw.items():
-        value = metadata.get(name)
-        if not same_value(raw_value, value):
-            warnings.append(
-                f"{name} is {raw_value!r} in core.xml but the library read it as {value!r}"
-            )
-    return warnings
-
-
-def same_value(raw, value):
-    """Compare a raw XML string with a value the library returned."""
-    if raw.endswith("Z"):
-        raw = raw[:-1] + "+00:00"
-    if value is None:
-        return raw == ""
-    return raw == str(value)

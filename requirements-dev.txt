@@ -1,0 +1,9 @@
+-r requirements.txt
+
+# Used by tests/make_generated_samples.py to write the sample files.
+python-docx
+openpyxl
+python-pptx
+
+# Provides olevba, which the macro findings are compared against.
+oletools
