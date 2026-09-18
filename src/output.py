@@ -7,10 +7,13 @@ from pathlib import Path
 
 from . import extractors, fileinfo
 
+LIST_FIELDS = ["hyperlinks", "embedded_objects", "macros"]
+
 CSV_COLUMNS = (
     ["file", "type", "sha256"]
     + [f"filesystem.{name}" for name in fileinfo.FILESYSTEM_FIELDS]
     + [f"metadata.{name}" for name in extractors.METADATA_FIELDS]
+    + LIST_FIELDS
     + ["warnings"]
 )
 
@@ -28,6 +31,8 @@ def print_csv(results):
         for group in ("filesystem", "metadata"):
             for name, value in result[group].items():
                 row[f"{group}.{name}"] = value
+        for name in LIST_FIELDS:
+            row[name] = "; ".join(result[name] or [])
         row["warnings"] = "; ".join(result["warnings"])
         writer.writerow(row)
 
@@ -51,8 +56,19 @@ def print_result(result):
     file_info = {"path": result["file"], "sha256": result["sha256"], **result["filesystem"]}
     print_section("file", file_info)
     print_section("document metadata", result["metadata"])
+    print_list("hyperlinks", result["hyperlinks"])
+    print_list("embedded objects", result["embedded_objects"])
+    print_list("macro parts", result["macros"])
     for warning in result["warnings"]:
         print(f"  warning: {warning}")
+
+
+def print_list(heading, values):
+    if not values:
+        return
+    print(f"  {heading}:")
+    for value in values:
+        print(f"    {value}")
 
 
 def print_section(heading, values):

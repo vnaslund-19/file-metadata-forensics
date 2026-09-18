@@ -1,8 +1,11 @@
 """Scan a directory and extract metadata from the files in it."""
 
+import zipfile
 from pathlib import Path
 
-from . import extractors, fileinfo
+from . import extractors, fileinfo, ooxml
+
+OOXML_TYPES = ("docx", "xlsx", "pptx")
 
 
 def find_files(directory, recursive=False):
@@ -33,6 +36,11 @@ def new_result(path):
         "sha256": None,
         "filesystem": dict.fromkeys(fileinfo.FILESYSTEM_FIELDS),
         "metadata": dict.fromkeys(extractors.METADATA_FIELDS),
+        # None means the file was never checked for these, an empty list means
+        # it was checked and none were found.
+        "hyperlinks": None,
+        "embedded_objects": None,
+        "macros": None,
         "warnings": [],
     }
 
@@ -59,4 +67,27 @@ def extract_metadata(path):
         return result
 
     result["metadata"], result["warnings"] = extractors.extract(path, result["type"])
+
+    if result["type"] in OOXML_TYPES:
+        add_container_details(result, path)
     return result
+
+
+def add_container_details(result, path):
+    """Add what the ZIP container holds, and check it against the library's reading."""
+    try:
+        details, warnings = ooxml.inspect(path)
+    except (OSError, zipfile.BadZipFile) as error:
+        result["warnings"].append(f"could not read the archive: {error}")
+        return
+
+    result["metadata"].update(
+        {name: value or None for name, value in details["app_properties"].items()}
+    )
+    result["hyperlinks"] = details["hyperlinks"]
+    result["embedded_objects"] = details["embedded_objects"]
+    result["macros"] = details["macros"]
+    result["warnings"] += warnings
+    result["warnings"] += ooxml.compare_with_library(
+        details["core_properties"], result["metadata"]
+    )
