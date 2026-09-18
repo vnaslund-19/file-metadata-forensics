@@ -1,0 +1,27 @@
+olevba 0.60.2 on samples/sample_macro.docm
+Recorded 2026-09-18
+
+olevba 0.60.2 on Python 3.14.7 - http://decalage.info/python/oletools
+===============================================================================
+FILE: samples/sample_macro.docm
+Type: OpenXML
+WARNING  For now, VBA stomping cannot be detected for files in memory
+-------------------------------------------------------------------------------
+VBA MACRO ThisDocument.cls 
+in file: word/vbaProject.bin - OLE stream: 'VBA/ThisDocument'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+(empty macro)
+-------------------------------------------------------------------------------
+VBA MACRO Module1.bas 
+in file: word/vbaProject.bin - OLE stream: 'VBA/Module1'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Sub AutoOpen()
+    MsgBox "Controlled test macro. No action taken."
+End Sub
+
++----------+--------------------+---------------------------------------------+
+|Type      |Keyword             |Description                                  |
++----------+--------------------+---------------------------------------------+
+|AutoExec  |AutoOpen            |Runs when the Word document is opened        |
++----------+--------------------+---------------------------------------------+
+
