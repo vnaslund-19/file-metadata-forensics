@@ -139,6 +139,21 @@ def parse_part(package, name, warnings):
         return None
 
 
+def as_library_values(core):
+    """Core properties in the same form the libraries return them."""
+    values = {}
+    for name, raw in core.items():
+        if not raw:
+            values[name] = None
+        elif name == "revision" and raw.isdigit():
+            values[name] = int(raw)
+        elif raw.endswith("Z"):
+            values[name] = raw[:-1] + "+00:00"
+        else:
+            values[name] = raw
+    return values
+
+
 def compare_with_library(raw, metadata):
     """Report fields where core.xml and the format library disagree."""
     warnings = []

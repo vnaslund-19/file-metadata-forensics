@@ -72,8 +72,10 @@ def extract_metadata(path):
         add_pdf_details(result, path)
         return result
 
-    result["metadata"], result["warnings"] = extractors.extract(path, result["type"])
-    add_container_details(result, path)
+    from_library, result["warnings"] = extractors.extract(path, result["type"])
+    if from_library is not None:
+        result["metadata"] = from_library
+    add_container_details(result, path, from_library)
     return result
 
 
@@ -92,8 +94,12 @@ def add_pdf_details(result, path):
     result["warnings"] += warnings
 
 
-def add_container_details(result, path):
-    """Add what the ZIP container holds, and check it against the library's reading."""
+def add_container_details(result, path, from_library):
+    """Add what the ZIP container holds.
+
+    Where the library also read the properties, the two readings are compared.
+    Where it could not open the file, the properties come from the XML instead.
+    """
     try:
         details, warnings = ooxml.inspect(path)
     except (OSError, zipfile.BadZipFile) as error:
@@ -108,6 +114,11 @@ def add_container_details(result, path):
     result["embedded_objects"] = details["embedded_objects"]
     result["macros"] = details["macros"]
     result["warnings"] += warnings
-    result["warnings"] += ooxml.compare_with_library(
-        details["core_properties"], result["metadata"]
-    )
+
+    if from_library is None:
+        result["metadata"].update(ooxml.as_library_values(details["core_properties"]))
+        result["warnings"].append("core properties were read from the XML, not the library")
+    else:
+        result["warnings"] += ooxml.compare_with_library(
+            details["core_properties"], result["metadata"]
+        )

@@ -85,17 +85,22 @@ XLSX_CORE_PROPERTIES = {
 
 
 def extract(path, file_type):
-    """Return (metadata, warnings). A file that can't be read gives a warning, not a crash."""
+    """Return (metadata, warnings), with metadata None if the library cannot open the file.
+
+    Macro-enabled files are the usual reason. All three libraries check the
+    content type and refuse a file marked macroEnabled, so those properties have
+    to be read from the XML instead.
+    """
     extractors = {
         "docx": extract_docx,
         "xlsx": extract_xlsx,
         "pptx": extract_pptx,
     }
-    metadata = dict.fromkeys(METADATA_FIELDS)
     try:
         found, warnings = extractors[file_type](path)
     except Exception as error:
-        return metadata, [f"could not read {file_type} metadata: {error}"]
+        return None, [f"the {file_type} library could not open this file: {error}"]
+    metadata = dict.fromkeys(METADATA_FIELDS)
     metadata.update(found)
     return metadata, warnings
 
