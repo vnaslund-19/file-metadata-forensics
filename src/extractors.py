@@ -1,23 +1,17 @@
-"""Metadata stored inside the documents themselves.
+"""Metadata stored inside Office documents, read through the format libraries.
 
-Everything here goes through the format libraries (python-docx, openpyxl,
-python-pptx, pypdf). Reading the OOXML parts by hand is deliberately left to
-the container analysis later on, so that the two approaches can be compared
-against each other rather than sharing code.
+Reading the same properties straight out of the file is done separately, in
+ooxml.py, so the two readings can be compared rather than sharing code.
 
-Note that the libraries only expose the core properties of an Office file.
-'Company', 'Manager' and 'Hyperlink base' live in docProps/app.xml, which none of
-them read, so those values do not appear here.
+The libraries only expose the core properties. Company, Manager and Hyperlink
+base live in docProps/app.xml, which none of them read.
 """
 
-import contextlib
 import datetime
-import logging
 
 import docx
 import openpyxl
 import pptx
-import pypdf
 
 # Every result has all of these. Fields a format doesn't have are None.
 METADATA_FIELDS = [
@@ -42,6 +36,8 @@ METADATA_FIELDS = [
     "pages",
     "pdf_version",
     "has_xmp_metadata",
+    "document_id",
+    "instance_id",
     "content_status",
     "identifier",
     "language",
@@ -94,7 +90,6 @@ def extract(path, file_type):
         "docx": extract_docx,
         "xlsx": extract_xlsx,
         "pptx": extract_pptx,
-        "pdf": extract_pdf,
     }
     metadata = dict.fromkeys(METADATA_FIELDS)
     try:
@@ -133,81 +128,6 @@ def extract_xlsx(path):
         return metadata, []
     finally:
         workbook.close()
-
-
-class MessageCollector(logging.Handler):
-    def __init__(self):
-        super().__init__()
-        self.messages = []
-
-    def emit(self, record):
-        self.messages.append(record.getMessage())
-
-
-@contextlib.contextmanager
-def collect_pypdf_messages():
-    """Keep pypdf's complaints instead of letting them print.
-
-    pypdf logs damaged structure rather than raising, and those complaints say
-    something about the file, so they belong in the results.
-    """
-    logger = logging.getLogger("pypdf")
-    handler = MessageCollector()
-    propagate = logger.propagate
-    logger.addHandler(handler)
-    logger.propagate = False
-    try:
-        yield handler.messages
-    finally:
-        logger.propagate = propagate
-        logger.removeHandler(handler)
-
-
-def extract_pdf(path):
-    warnings = []
-    with collect_pypdf_messages() as messages:
-        metadata = read_pdf(path, warnings)
-    warnings.extend(messages)
-    return metadata, warnings
-
-
-def read_pdf(path, warnings):
-    reader = pypdf.PdfReader(path)
-
-    if reader.is_encrypted:
-        warnings.append("PDF is encrypted; metadata may be incomplete")
-
-    info = reader.metadata
-    if info is None:
-        warnings.append("PDF has no document information dictionary")
-
-    return {
-        "title": clean(getattr(info, "title", None)),
-        "subject": clean(getattr(info, "subject", None)),
-        "author": clean(getattr(info, "author", None)),
-        "keywords": clean(getattr(info, "keywords", None)),
-        # /Creator is the program the document was written in, /Producer the
-        # one that turned it into a PDF. They are often different programs.
-        "application": clean(getattr(info, "creator", None)),
-        "producer": clean(getattr(info, "producer", None)),
-        "created": read_pdf_date(info, "creation_date", warnings),
-        "modified": read_pdf_date(info, "modification_date", warnings),
-        "pages": len(reader.pages),
-        "pdf_version": reader.pdf_header.replace("%PDF-", ""),
-        "has_xmp_metadata": reader.xmp_metadata is not None,
-    }
-
-
-def read_pdf_date(info, name, warnings):
-    """PDF dates are free-form text, so fall back to the raw string."""
-    if info is None:
-        return None
-    try:
-        return clean(getattr(info, name))
-    except Exception:
-        raw = info.get("/CreationDate" if name.startswith("creation") else "/ModDate")
-        warnings.append(f"could not parse {name}: {raw!r}")
-        return str(raw)
 
 
 def clean(value):

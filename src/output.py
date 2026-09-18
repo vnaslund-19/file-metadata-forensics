@@ -7,7 +7,13 @@ from pathlib import Path
 
 from . import extractors, fileinfo
 
-LIST_FIELDS = ["hyperlinks", "embedded_objects", "macros"]
+LIST_FIELDS = [
+    "hyperlinks",
+    "external_relationships",
+    "embedded_objects",
+    "macros",
+    "javascript",
+]
 
 CSV_COLUMNS = (
     ["file", "type", "sha256"]
@@ -32,7 +38,7 @@ def print_csv(results):
             for name, value in result[group].items():
                 row[f"{group}.{name}"] = value
         for name in LIST_FIELDS:
-            row[name] = "; ".join(result[name] or [])
+            row[name] = "; ".join(as_text(item) for item in result[name] or [])
         row["warnings"] = "; ".join(result["warnings"])
         writer.writerow(row)
 
@@ -57,8 +63,10 @@ def print_result(result):
     print_section("file", file_info)
     print_section("document metadata", result["metadata"])
     print_list("hyperlinks", result["hyperlinks"])
+    print_list("external relationships", result["external_relationships"])
     print_list("embedded objects", result["embedded_objects"])
     print_list("macro parts", result["macros"])
+    print_list("javascript", result["javascript"])
     for warning in result["warnings"]:
         print(f"  warning: {warning}")
 
@@ -68,7 +76,14 @@ def print_list(heading, values):
         return
     print(f"  {heading}:")
     for value in values:
-        print(f"    {value}")
+        print(f"    {as_text(value)}")
+
+
+def as_text(value):
+    """An external relationship is a type and a target, everything else is a string."""
+    if isinstance(value, dict):
+        return f"{value['type']}  {value['target']}"
+    return str(value)
 
 
 def print_section(heading, values):

@@ -10,7 +10,17 @@ import datetime
 import hashlib
 from pathlib import Path
 
-SUPPORTED_EXTENSIONS = {".docx", ".xlsx", ".pptx", ".pdf"}
+# The macro-enabled extensions hold the same format as their plain counterparts,
+# so they are read the same way.
+SUPPORTED_EXTENSIONS = {
+    ".docx": "docx",
+    ".docm": "docx",
+    ".xlsx": "xlsx",
+    ".xlsm": "xlsx",
+    ".pptx": "pptx",
+    ".pptm": "pptx",
+    ".pdf": "pdf",
+}
 
 READ_SIZE = 65536
 
@@ -19,10 +29,7 @@ FILESYSTEM_FIELDS = ["name", "extension", "size_bytes", "created", "modified", "
 
 def file_type(path):
     """Short name for the file type, or None if it is not one we handle."""
-    suffix = Path(path).suffix.lower()
-    if suffix in SUPPORTED_EXTENSIONS:
-        return suffix.lstrip(".")
-    return None
+    return SUPPORTED_EXTENSIONS.get(Path(path).suffix.lower())
 
 
 def sha256(path):

@@ -12,10 +12,6 @@ from xml.etree import ElementTree
 CORE_PART = "docProps/core.xml"
 APP_PART = "docProps/app.xml"
 
-HYPERLINK_RELATIONSHIP = (
-    "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink"
-)
-
 # Property files are small. A very large one is more likely an attempt to
 # overload the XML parser than a real document.
 MAX_PART_SIZE = 1_000_000
@@ -58,10 +54,12 @@ def inspect(path):
         names = package.namelist()
         if CORE_PART not in names:
             warnings.append(f"no {CORE_PART} in the archive")
+        hyperlinks, external = read_external_relationships(package, names, warnings)
         details = {
             "core_properties": read_properties(package, CORE_PART, CORE_NAMES, warnings),
             "app_properties": read_properties(package, APP_PART, APP_NAMES, warnings),
-            "hyperlinks": read_hyperlinks(package, names, warnings),
+            "hyperlinks": hyperlinks,
+            "external_relationships": external,
             "embedded_objects": [name for name in names if is_embedded_object(name)],
             "macros": [name for name in names if is_macro_part(name)],
         }
@@ -81,9 +79,14 @@ def read_properties(package, part, names, warnings):
     return values
 
 
-def read_hyperlinks(package, names, warnings):
-    """Collect the addresses the document links to, from its relationship files."""
-    links = []
+def read_external_relationships(package, names, warnings):
+    """Addresses the document points at, split into hyperlinks and everything else.
+
+    A template, image or embedded object can also come from a remote address,
+    fetched when the file is opened rather than when a link is clicked.
+    """
+    hyperlinks = []
+    others = []
     for name in names:
         if not name.endswith(".rels"):
             continue
@@ -91,14 +94,18 @@ def read_hyperlinks(package, names, warnings):
         if root is None:
             continue
         for element in root:
-            if element.get("Type") != HYPERLINK_RELATIONSHIP:
-                continue
             if element.get("TargetMode") != "External":
                 continue
             target = element.get("Target")
-            if target and target not in links:
-                links.append(target)
-    return links
+            if not target:
+                continue
+            kind = (element.get("Type") or "").rsplit("/", 1)[-1]
+            if kind == "hyperlink":
+                if target not in hyperlinks:
+                    hyperlinks.append(target)
+            elif {"type": kind, "target": target} not in others:
+                others.append({"type": kind, "target": target})
+    return hyperlinks, others
 
 
 def is_embedded_object(name):

@@ -3,7 +3,7 @@
 import zipfile
 from pathlib import Path
 
-from . import extractors, fileinfo, ooxml
+from . import extractors, fileinfo, ooxml, pdf
 
 OOXML_TYPES = ("docx", "xlsx", "pptx")
 
@@ -39,8 +39,10 @@ def new_result(path):
         # None means the file was never checked for these, an empty list means
         # it was checked and none were found.
         "hyperlinks": None,
+        "external_relationships": None,
         "embedded_objects": None,
         "macros": None,
+        "javascript": None,
         "warnings": [],
     }
 
@@ -66,11 +68,28 @@ def extract_metadata(path):
         result["warnings"].append("unsupported file type")
         return result
 
-    result["metadata"], result["warnings"] = extractors.extract(path, result["type"])
+    if result["type"] == "pdf":
+        add_pdf_details(result, path)
+        return result
 
-    if result["type"] in OOXML_TYPES:
-        add_container_details(result, path)
+    result["metadata"], result["warnings"] = extractors.extract(path, result["type"])
+    add_container_details(result, path)
     return result
+
+
+def add_pdf_details(result, path):
+    """Add everything a PDF holds: metadata, links, attachments and JavaScript."""
+    try:
+        details, warnings = pdf.inspect(path)
+    except Exception as error:
+        result["warnings"].append(f"could not read pdf metadata: {error}")
+        return
+
+    result["metadata"].update(details["metadata"])
+    result["hyperlinks"] = details["hyperlinks"]
+    result["embedded_objects"] = details["embedded_objects"]
+    result["javascript"] = details["javascript"]
+    result["warnings"] += warnings
 
 
 def add_container_details(result, path):
@@ -85,6 +104,7 @@ def add_container_details(result, path):
         {name: value or None for name, value in details["app_properties"].items()}
     )
     result["hyperlinks"] = details["hyperlinks"]
+    result["external_relationships"] = details["external_relationships"]
     result["embedded_objects"] = details["embedded_objects"]
     result["macros"] = details["macros"]
     result["warnings"] += warnings
