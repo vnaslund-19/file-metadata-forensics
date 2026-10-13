@@ -4,8 +4,8 @@ Everything comes from the two property files and the relationship files, read
 straight out of the archive. Python-docx, openpyxl or python-pptx are not used,
 on purpose. Reading the XML reaches fields none of them expose, such as Company, 
 Manager and Hyperlink base. It reports values as they are written rather than 
-as a library interprets them. And it works on macro-enabled files, which those 
-libraries refuse to open.
+as a library interprets them. And it works on .docm files, which python-docx
+refuses to open.
 """
 
 import zipfile
