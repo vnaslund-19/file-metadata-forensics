@@ -130,5 +130,54 @@
       "This route goes through the macOS print pipeline, which rebuilds the file and drops every document property. Only the timestamps and the producer string remain.",
       "The producer string identifies the operating system and build number of the machine that made the file."
     ]
+  },
+
+  "sample_photo.JPG": {
+    "type": "jpeg",
+    "source": "iPhone XR photo, AirDropped with All Photos Data on. Values from ExifTool 13.30 (results/reference/exiftool_images.txt).",
+    "size": [4032, 3024],
+    "exif": {
+      "Make": "Apple",
+      "Model": "iPhone XR",
+      "Software": "18.7.10",
+      "LensModel": "iPhone XR back camera 4.25mm f/1.8",
+      "Orientation": "Horizontal (normal)",
+      "DateTimeOriginal": "2026:10:13 19:07:46",
+      "OffsetTimeOriginal": "+11:00",
+      "ModifyDate": "2026:10:13 19:07:46",
+      "GPSLatitude": "33 deg 52' 59.51\" S",
+      "GPSLongitude": "151 deg 12' 8.89\" E",
+      "GPSAltitude": "24.48717486 m Above Sea Level",
+      "GPSDateTime": "2026:10:13 08:07:45Z"
+    },
+    "embedded_thumbnail": true
+  },
+
+  "sample_photo_edited.jpg": {
+    "type": "jpeg",
+    "source": "sample_photo.JPG cropped in iPhone Photos, AirDropped with All Photos Data off. Values from ExifTool 13.30.",
+    "size": [2568, 2154],
+    "exif": "Same values as sample_photo.JPG, including ExifImageWidth/Height 4032x3024 and the GPS position.",
+    "embedded_thumbnail": false
+  },
+
+  "sample_photo_whatsapp.jpeg": {
+    "type": "jpeg",
+    "source": "sample_photo.JPG sent through WhatsApp and saved on the Mac. Values from ExifTool 13.30.",
+    "size": [1600, 1200],
+    "exif": null,
+    "notes": ["JFIF header only, progressive encoding. No EXIF, GPS, ICC profile or XMP."]
+  },
+
+  "sample_screenshot.png": {
+    "type": "png",
+    "source": "macOS screenshot (Cmd+Shift+3). Values from ExifTool 13.30.",
+    "size": [882, 730],
+    "exif": {
+      "UserComment": "Screenshot",
+      "XResolution": 144
+    },
+    "xmp": true,
+    "notes": ["No PNG text chunks besides the XMP packet. The ICC profile describes the Mac's display."]
   }
 }

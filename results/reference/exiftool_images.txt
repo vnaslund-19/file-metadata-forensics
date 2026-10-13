@@ -1,0 +1,440 @@
+ExifTool 13.30 on the image samples (exiftool -G1 -a)
+Recorded 2026-10-13
+
+════════════════════════════════════════
+samples/sample_photo.JPG
+════════════════════════════════════════
+[System]        File Name                       : sample_photo.JPG
+[System]        Directory                       : samples
+[System]        File Size                       : 3.1 MB
+[System]        File Modification Date/Time     : 2026:10:13 19:07:46+11:00
+[System]        File Access Date/Time           : 2026:10:13 19:13:50+11:00
+[System]        File Inode Change Date/Time     : 2026:10:13 19:13:47+11:00
+[System]        File Permissions                : -rw-r--r--
+[File]          File Type                       : JPEG
+[File]          File Type Extension             : jpg
+[File]          MIME Type                       : image/jpeg
+[File]          Exif Byte Order                 : Big-endian (Motorola, MM)
+[File]          Image Width                     : 4032
+[File]          Image Height                    : 3024
+[File]          Encoding Process                : Baseline DCT, Huffman coding
+[File]          Bits Per Sample                 : 8
+[File]          Color Components                : 3
+[File]          Y Cb Cr Sub Sampling            : YCbCr4:2:0 (2 2)
+[IFD0]          Make                            : Apple
+[IFD0]          Camera Model Name               : iPhone XR
+[IFD0]          Orientation                     : Horizontal (normal)
+[IFD0]          X Resolution                    : 72
+[IFD0]          Y Resolution                    : 72
+[IFD0]          Resolution Unit                 : inches
+[IFD0]          Software                        : 18.7.10
+[IFD0]          Modify Date                     : 2026:10:13 19:07:46
+[IFD0]          Host Computer                   : iPhone XR
+[IFD0]          Y Cb Cr Positioning             : Centered
+[ExifIFD]       Exposure Time                   : 1/25
+[ExifIFD]       F Number                        : 1.8
+[ExifIFD]       Exposure Program                : Program AE
+[ExifIFD]       ISO                             : 640
+[ExifIFD]       Exif Version                    : 0232
+[ExifIFD]       Date/Time Original              : 2026:10:13 19:07:46
+[ExifIFD]       Create Date                     : 2026:10:13 19:07:46
+[ExifIFD]       Offset Time                     : +11:00
+[ExifIFD]       Offset Time Original            : +11:00
+[ExifIFD]       Offset Time Digitized           : +11:00
+[ExifIFD]       Components Configuration        : Y, Cb, Cr, -
+[ExifIFD]       Shutter Speed Value             : 1/25
+[ExifIFD]       Aperture Value                  : 1.8
+[ExifIFD]       Brightness Value                : -0.8451432871
+[ExifIFD]       Exposure Compensation           : 0
+[ExifIFD]       Metering Mode                   : Multi-segment
+[ExifIFD]       Flash                           : Off, Did not fire
+[ExifIFD]       Focal Length                    : 4.2 mm
+[ExifIFD]       Subject Area                    : 2015 1510 2323 1393
+[ExifIFD]       Sub Sec Time Original           : 746
+[ExifIFD]       Sub Sec Time Digitized          : 746
+[ExifIFD]       Flashpix Version                : 0100
+[ExifIFD]       Color Space                     : Uncalibrated
+[ExifIFD]       Exif Image Width                : 4032
+[ExifIFD]       Exif Image Height               : 3024
+[ExifIFD]       Sensing Method                  : One-chip color area
+[ExifIFD]       Scene Type                      : Directly photographed
+[ExifIFD]       Exposure Mode                   : Auto
+[ExifIFD]       White Balance                   : Auto
+[ExifIFD]       Focal Length In 35mm Format     : 26 mm
+[ExifIFD]       Scene Capture Type              : Standard
+[ExifIFD]       Lens Info                       : 4.25mm f/1.8
+[ExifIFD]       Lens Make                       : Apple
+[ExifIFD]       Lens Model                      : iPhone XR back camera 4.25mm f/1.8
+[ExifIFD]       Composite Image                 : General Composite Image
+[Apple]         Maker Note Version              : 15
+[Apple]         Run Time Flags                  : Valid
+[Apple]         Run Time Value                  : 1591441585500
+[Apple]         Run Time Scale                  : 1000000000
+[Apple]         Run Time Epoch                  : 0
+[Apple]         AE Stable                       : No
+[Apple]         AE Target                       : 156
+[Apple]         AE Average                      : 165
+[Apple]         AF Stable                       : Yes
+[Apple]         Acceleration Vector             : -0.8204328423 -0.5628229974 -0.1358595788
+[Apple]         Focus Distance Range            : 0.68 - 1.15 m
+[Apple]         Image Capture Type              : Photo
+[Apple]         Live Photo Video Index          : 13639680
+[Apple]         Photos App Feature Flags        : 0
+[Apple]         HDR Headroom                    : 0
+[Apple]         AF Performance                  : 106 1 202
+[Apple]         Signal To Noise Ratio           : 25.84582329
+[Apple]         Photo Identifier                : 8A95F07F-AC52-45E5-8728-CB72059DF164
+[Apple]         Color Temperature               : 8407
+[Apple]         Camera Type                     : Back Normal
+[Apple]         Focus Position                  : 80
+[GPS]           GPS Latitude Ref                : South
+[GPS]           GPS Latitude                    : 33 deg 52' 59.51"
+[GPS]           GPS Longitude Ref               : East
+[GPS]           GPS Longitude                   : 151 deg 12' 8.89"
+[GPS]           GPS Altitude Ref                : Above Sea Level
+[GPS]           GPS Altitude                    : 24.48717486 m
+[GPS]           GPS Time Stamp                  : 08:07:45
+[GPS]           GPS Speed Ref                   : km/h
+[GPS]           GPS Speed                       : 0
+[GPS]           GPS Img Direction Ref           : True North
+[GPS]           GPS Img Direction               : 137.08815
+[GPS]           GPS Dest Bearing Ref            : True North
+[GPS]           GPS Dest Bearing                : 137.08815
+[GPS]           GPS Date Stamp                  : 2026:10:13
+[GPS]           GPS Horizontal Positioning Error: 17.88452883 m
+[IFD1]          Compression                     : JPEG (old-style)
+[IFD1]          X Resolution                    : 72
+[IFD1]          Y Resolution                    : 72
+[IFD1]          Resolution Unit                 : inches
+[IFD1]          Thumbnail Offset                : 2704
+[IFD1]          Thumbnail Length                : 8433
+[IFD1]          Thumbnail Image                 : (Binary data 8433 bytes, use -b option to extract)
+[ICC-header]    Profile CMM Type                : Apple Computer Inc.
+[ICC-header]    Profile Version                 : 4.0.0
+[ICC-header]    Profile Class                   : Display Device Profile
+[ICC-header]    Color Space Data                : RGB
+[ICC-header]    Profile Connection Space        : XYZ
+[ICC-header]    Profile Date Time               : 2022:01:01 00:00:00
+[ICC-header]    Profile File Signature          : acsp
+[ICC-header]    Primary Platform                : Apple Computer Inc.
+[ICC-header]    CMM Flags                       : Not Embedded, Independent
+[ICC-header]    Device Manufacturer             : Apple Computer Inc.
+[ICC-header]    Device Model                    : 
+[ICC-header]    Device Attributes               : Reflective, Glossy, Positive, Color
+[ICC-header]    Rendering Intent                : Perceptual
+[ICC-header]    Connection Space Illuminant     : 0.9642 1 0.82491
+[ICC-header]    Profile Creator                 : Apple Computer Inc.
+[ICC-header]    Profile ID                      : ecfda38e388547c36db4bd4f7ada182f
+[ICC_Profile]   Profile Description             : Display P3
+[ICC_Profile]   Profile Copyright               : Copyright Apple Inc., 2022
+[ICC_Profile]   Media White Point               : 0.96419 1 0.82489
+[ICC_Profile]   Red Matrix Column               : 0.51512 0.2412 -0.00105
+[ICC_Profile]   Green Matrix Column             : 0.29198 0.69225 0.04189
+[ICC_Profile]   Blue Matrix Column              : 0.1571 0.06657 0.78407
+[ICC_Profile]   Red Tone Reproduction Curve     : (Binary data 32 bytes, use -b option to extract)
+[ICC_Profile]   Chromatic Adaptation            : 1.04788 0.02292 -0.0502 0.02959 0.99048 -0.01706 -0.00923 0.01508 0.75168
+[ICC_Profile]   Blue Tone Reproduction Curve    : (Binary data 32 bytes, use -b option to extract)
+[ICC_Profile]   Green Tone Reproduction Curve   : (Binary data 32 bytes, use -b option to extract)
+[AROT]          HDR Gain Curve Size             : 188
+[AROT]          HDR Gain Curve                  : (Binary data 1415 bytes, use -b option to extract)
+[Composite]     Run Time Since Power Up         : 0:26:31
+[Composite]     Aperture                        : 1.8
+[Composite]     Image Size                      : 4032x3024
+[Composite]     Megapixels                      : 12.2
+[Composite]     Scale Factor To 35 mm Equivalent: 6.1
+[Composite]     Shutter Speed                   : 1/25
+[Composite]     Create Date                     : 2026:10:13 19:07:46.746+11:00
+[Composite]     Date/Time Original              : 2026:10:13 19:07:46.746+11:00
+[Composite]     Modify Date                     : 2026:10:13 19:07:46+11:00
+[Composite]     GPS Altitude                    : 24.4 m Above Sea Level
+[Composite]     GPS Date/Time                   : 2026:10:13 08:07:45Z
+[Composite]     GPS Latitude                    : 33 deg 52' 59.51" S
+[Composite]     GPS Longitude                   : 151 deg 12' 8.89" E
+[Composite]     Circle Of Confusion             : 0.005 mm
+[Composite]     Field Of View                   : 69.4 deg
+[Composite]     Focal Length                    : 4.2 mm (35 mm equivalent: 26.0 mm)
+[Composite]     GPS Position                    : 33 deg 52' 59.51" S, 151 deg 12' 8.89" E
+[Composite]     Hyperfocal Distance             : 2.04 m
+[Composite]     Light Value                     : 3.7
+[Composite]     Lens ID                         : iPhone XR back camera 4.25mm f/1.8
+
+════════════════════════════════════════
+samples/sample_photo_edited.jpg
+════════════════════════════════════════
+[System]        File Name                       : sample_photo_edited.jpg
+[System]        Directory                       : samples
+[System]        File Size                       : 1126 kB
+[System]        File Modification Date/Time     : 2026:10:13 19:07:46+11:00
+[System]        File Access Date/Time           : 2026:10:13 19:13:50+11:00
+[System]        File Inode Change Date/Time     : 2026:10:13 19:13:47+11:00
+[System]        File Permissions                : -rw-r--r--
+[File]          File Type                       : JPEG
+[File]          File Type Extension             : jpg
+[File]          MIME Type                       : image/jpeg
+[File]          Exif Byte Order                 : Big-endian (Motorola, MM)
+[File]          Image Width                     : 2568
+[File]          Image Height                    : 2154
+[File]          Encoding Process                : Baseline DCT, Huffman coding
+[File]          Bits Per Sample                 : 8
+[File]          Color Components                : 3
+[File]          Y Cb Cr Sub Sampling            : YCbCr4:2:0 (2 2)
+[IFD0]          Make                            : Apple
+[IFD0]          Camera Model Name               : iPhone XR
+[IFD0]          Orientation                     : Horizontal (normal)
+[IFD0]          X Resolution                    : 72
+[IFD0]          Y Resolution                    : 72
+[IFD0]          Resolution Unit                 : inches
+[IFD0]          Software                        : 18.7.10
+[IFD0]          Modify Date                     : 2026:10:13 19:07:46
+[IFD0]          Host Computer                   : iPhone XR
+[IFD0]          Y Cb Cr Positioning             : Centered
+[ExifIFD]       Exposure Time                   : 1/25
+[ExifIFD]       F Number                        : 1.8
+[ExifIFD]       Exposure Program                : Program AE
+[ExifIFD]       ISO                             : 640
+[ExifIFD]       Exif Version                    : 0232
+[ExifIFD]       Date/Time Original              : 2026:10:13 19:07:46
+[ExifIFD]       Create Date                     : 2026:10:13 19:07:46
+[ExifIFD]       Offset Time                     : +11:00
+[ExifIFD]       Offset Time Original            : +11:00
+[ExifIFD]       Offset Time Digitized           : +11:00
+[ExifIFD]       Components Configuration        : Y, Cb, Cr, -
+[ExifIFD]       Shutter Speed Value             : 1/25
+[ExifIFD]       Aperture Value                  : 1.8
+[ExifIFD]       Brightness Value                : -0.8451432871
+[ExifIFD]       Exposure Compensation           : 0
+[ExifIFD]       Metering Mode                   : Multi-segment
+[ExifIFD]       Flash                           : Off, Did not fire
+[ExifIFD]       Focal Length                    : 4.2 mm
+[ExifIFD]       Subject Area                    : 2015 1510 2323 1393
+[ExifIFD]       Sub Sec Time Original           : 746
+[ExifIFD]       Sub Sec Time Digitized          : 746
+[ExifIFD]       Flashpix Version                : 0100
+[ExifIFD]       Color Space                     : Uncalibrated
+[ExifIFD]       Exif Image Width                : 4032
+[ExifIFD]       Exif Image Height               : 3024
+[ExifIFD]       Sensing Method                  : One-chip color area
+[ExifIFD]       Scene Type                      : Directly photographed
+[ExifIFD]       Exposure Mode                   : Auto
+[ExifIFD]       White Balance                   : Auto
+[ExifIFD]       Focal Length In 35mm Format     : 26 mm
+[ExifIFD]       Scene Capture Type              : Standard
+[ExifIFD]       Lens Info                       : 4.25mm f/1.8
+[ExifIFD]       Lens Make                       : Apple
+[ExifIFD]       Lens Model                      : iPhone XR back camera 4.25mm f/1.8
+[ExifIFD]       Composite Image                 : General Composite Image
+[Apple]         Maker Note Version              : 15
+[Apple]         Run Time Flags                  : Valid
+[Apple]         Run Time Value                  : 1591441585500
+[Apple]         Run Time Scale                  : 1000000000
+[Apple]         Run Time Epoch                  : 0
+[Apple]         AE Stable                       : No
+[Apple]         AE Target                       : 156
+[Apple]         AE Average                      : 165
+[Apple]         AF Stable                       : Yes
+[Apple]         Acceleration Vector             : -0.8204328423 -0.5628229974 -0.1358595788
+[Apple]         Focus Distance Range            : 0.68 - 1.15 m
+[Apple]         Image Capture Type              : Photo
+[Apple]         Live Photo Video Index          : 13639680
+[Apple]         Photos App Feature Flags        : 0
+[Apple]         HDR Headroom                    : 0
+[Apple]         AF Performance                  : 106 1 202
+[Apple]         Signal To Noise Ratio           : 25.84582329
+[Apple]         Photo Identifier                : 8A95F07F-AC52-45E5-8728-CB72059DF164
+[Apple]         Color Temperature               : 8407
+[Apple]         Camera Type                     : Back Normal
+[Apple]         Focus Position                  : 80
+[GPS]           GPS Latitude Ref                : South
+[GPS]           GPS Latitude                    : 33 deg 52' 59.51"
+[GPS]           GPS Longitude Ref               : East
+[GPS]           GPS Longitude                   : 151 deg 12' 8.89"
+[GPS]           GPS Altitude Ref                : Above Sea Level
+[GPS]           GPS Altitude                    : 24.48717486 m
+[GPS]           GPS Time Stamp                  : 08:07:45
+[GPS]           GPS Speed Ref                   : km/h
+[GPS]           GPS Speed                       : 0
+[GPS]           GPS Img Direction Ref           : True North
+[GPS]           GPS Img Direction               : 137.08815
+[GPS]           GPS Dest Bearing Ref            : True North
+[GPS]           GPS Dest Bearing                : 137.08815
+[GPS]           GPS Date Stamp                  : 2026:10:13
+[GPS]           GPS Horizontal Positioning Error: 17.88452883 m
+[ICC-header]    Profile CMM Type                : Apple Computer Inc.
+[ICC-header]    Profile Version                 : 4.0.0
+[ICC-header]    Profile Class                   : Display Device Profile
+[ICC-header]    Color Space Data                : RGB
+[ICC-header]    Profile Connection Space        : XYZ
+[ICC-header]    Profile Date Time               : 2022:01:01 00:00:00
+[ICC-header]    Profile File Signature          : acsp
+[ICC-header]    Primary Platform                : Apple Computer Inc.
+[ICC-header]    CMM Flags                       : Not Embedded, Independent
+[ICC-header]    Device Manufacturer             : Apple Computer Inc.
+[ICC-header]    Device Model                    : 
+[ICC-header]    Device Attributes               : Reflective, Glossy, Positive, Color
+[ICC-header]    Rendering Intent                : Perceptual
+[ICC-header]    Connection Space Illuminant     : 0.9642 1 0.82491
+[ICC-header]    Profile Creator                 : Apple Computer Inc.
+[ICC-header]    Profile ID                      : ecfda38e388547c36db4bd4f7ada182f
+[ICC_Profile]   Profile Description             : Display P3
+[ICC_Profile]   Profile Copyright               : Copyright Apple Inc., 2022
+[ICC_Profile]   Media White Point               : 0.96419 1 0.82489
+[ICC_Profile]   Red Matrix Column               : 0.51512 0.2412 -0.00105
+[ICC_Profile]   Green Matrix Column             : 0.29198 0.69225 0.04189
+[ICC_Profile]   Blue Matrix Column              : 0.1571 0.06657 0.78407
+[ICC_Profile]   Red Tone Reproduction Curve     : (Binary data 32 bytes, use -b option to extract)
+[ICC_Profile]   Chromatic Adaptation            : 1.04788 0.02292 -0.0502 0.02959 0.99048 -0.01706 -0.00923 0.01508 0.75168
+[ICC_Profile]   Blue Tone Reproduction Curve    : (Binary data 32 bytes, use -b option to extract)
+[ICC_Profile]   Green Tone Reproduction Curve   : (Binary data 32 bytes, use -b option to extract)
+[AROT]          HDR Gain Curve Size             : 134
+[AROT]          HDR Gain Curve                  : (Binary data 922 bytes, use -b option to extract)
+[Composite]     Run Time Since Power Up         : 0:26:31
+[Composite]     Aperture                        : 1.8
+[Composite]     Image Size                      : 2568x2154
+[Composite]     Megapixels                      : 5.5
+[Composite]     Scale Factor To 35 mm Equivalent: 6.1
+[Composite]     Shutter Speed                   : 1/25
+[Composite]     Create Date                     : 2026:10:13 19:07:46.746+11:00
+[Composite]     Date/Time Original              : 2026:10:13 19:07:46.746+11:00
+[Composite]     Modify Date                     : 2026:10:13 19:07:46+11:00
+[Composite]     GPS Altitude                    : 24.4 m Above Sea Level
+[Composite]     GPS Date/Time                   : 2026:10:13 08:07:45Z
+[Composite]     GPS Latitude                    : 33 deg 52' 59.51" S
+[Composite]     GPS Longitude                   : 151 deg 12' 8.89" E
+[Composite]     Circle Of Confusion             : 0.005 mm
+[Composite]     Field Of View                   : 69.4 deg
+[Composite]     Focal Length                    : 4.2 mm (35 mm equivalent: 26.0 mm)
+[Composite]     GPS Position                    : 33 deg 52' 59.51" S, 151 deg 12' 8.89" E
+[Composite]     Hyperfocal Distance             : 2.04 m
+[Composite]     Light Value                     : 3.7
+[Composite]     Lens ID                         : iPhone XR back camera 4.25mm f/1.8
+
+════════════════════════════════════════
+samples/sample_photo_whatsapp.jpeg
+════════════════════════════════════════
+[System]        File Name                       : sample_photo_whatsapp.jpeg
+[System]        Directory                       : samples
+[System]        File Size                       : 153 kB
+[System]        File Modification Date/Time     : 2026:10:13 19:11:52+11:00
+[System]        File Access Date/Time           : 2026:10:13 19:13:49+11:00
+[System]        File Inode Change Date/Time     : 2026:10:13 19:13:47+11:00
+[System]        File Permissions                : -rw-r--r--
+[File]          File Type                       : JPEG
+[File]          File Type Extension             : jpg
+[File]          MIME Type                       : image/jpeg
+[File]          Image Width                     : 1600
+[File]          Image Height                    : 1200
+[File]          Encoding Process                : Progressive DCT, Huffman coding
+[File]          Bits Per Sample                 : 8
+[File]          Color Components                : 3
+[File]          Y Cb Cr Sub Sampling            : YCbCr4:2:0 (2 2)
+[JFIF]          JFIF Version                    : 1.01
+[JFIF]          Resolution Unit                 : None
+[JFIF]          X Resolution                    : 1
+[JFIF]          Y Resolution                    : 1
+[Composite]     Image Size                      : 1600x1200
+[Composite]     Megapixels                      : 1.9
+
+════════════════════════════════════════
+samples/sample_screenshot.png
+════════════════════════════════════════
+[System]        File Name                       : sample_screenshot.png
+[System]        Directory                       : samples
+[System]        File Size                       : 1202 kB
+[System]        File Modification Date/Time     : 2026:10:13 19:13:23+11:00
+[System]        File Access Date/Time           : 2026:10:13 19:13:50+11:00
+[System]        File Inode Change Date/Time     : 2026:10:13 19:13:47+11:00
+[System]        File Permissions                : -rw-r--r--
+[File]          File Type                       : PNG
+[File]          File Type Extension             : png
+[File]          MIME Type                       : image/png
+[File]          Exif Byte Order                 : Big-endian (Motorola, MM)
+[PNG]           Image Width                     : 882
+[PNG]           Image Height                    : 730
+[PNG]           Bit Depth                       : 8
+[PNG]           Color Type                      : RGB with Alpha
+[PNG]           Compression                     : Deflate/Inflate
+[PNG]           Filter                          : Adaptive
+[PNG]           Interlace                       : Noninterlaced
+[PNG]           Profile Name                    : ICC Profile
+[PNG]           Apple Data Offsets              : (Binary data 28 bytes, use -b option to extract)
+[ICC-header]    Profile CMM Type                : Apple Computer Inc.
+[ICC-header]    Profile Version                 : 2.1.0
+[ICC-header]    Profile Class                   : Display Device Profile
+[ICC-header]    Color Space Data                : RGB
+[ICC-header]    Profile Connection Space        : XYZ
+[ICC-header]    Profile Date Time               : 2026:01:02 01:34:06
+[ICC-header]    Profile File Signature          : acsp
+[ICC-header]    Primary Platform                : Apple Computer Inc.
+[ICC-header]    CMM Flags                       : Not Embedded, Independent
+[ICC-header]    Device Manufacturer             : Apple Computer Inc.
+[ICC-header]    Device Model                    : 
+[ICC-header]    Device Attributes               : Reflective, Glossy, Positive, Color
+[ICC-header]    Rendering Intent                : Perceptual
+[ICC-header]    Connection Space Illuminant     : 0.9642 1 0.82491
+[ICC-header]    Profile Creator                 : Apple Computer Inc.
+[ICC-header]    Profile ID                      : 0
+[ICC_Profile]   Profile Description             : Display
+[ICC_Profile]   Profile Description ML (hr-HR)  : LCD u boji
+[ICC_Profile]   Profile Description ML (ko-KR)  : 컬러 LCD
+[ICC_Profile]   Profile Description ML (nb-NO)  : Farge-LCD
+[ICC_Profile]   Profile Description ML          : LCD Warna
+[ICC_Profile]   Profile Description ML (hu-HU)  : Színes LCD
+[ICC_Profile]   Profile Description ML (cs-CZ)  : Barevný LCD
+[ICC_Profile]   Profile Description ML (da-DK)  : LCD-farveskærm
+[ICC_Profile]   Profile Description ML (nl-NL)  : Kleuren-LCD
+[ICC_Profile]   Profile Description ML (fi-FI)  : Väri-LCD
+[ICC_Profile]   Profile Description ML (it-IT)  : LCD a colori
+[ICC_Profile]   Profile Description ML (es-ES)  : LCD a color
+[ICC_Profile]   Profile Description ML (ro-RO)  : LCD color
+[ICC_Profile]   Profile Description ML (fr-CA)  : ACL couleur
+[ICC_Profile]   Profile Description ML          : ‏LCD ملونة
+[ICC_Profile]   Profile Description ML (uk-UA)  : Кольоровий LCD
+[ICC_Profile]   Profile Description ML (he-IL)  : ‏LCD צבעוני
+[ICC_Profile]   Profile Description ML (zh-TW)  : 彩色LCD
+[ICC_Profile]   Profile Description ML (vi-VN)  : LCD Màu
+[ICC_Profile]   Profile Description ML (sk-SK)  : Farebný LCD
+[ICC_Profile]   Profile Description ML (zh-CN)  : 彩色LCD
+[ICC_Profile]   Profile Description ML (ru-RU)  : Цветной ЖК-дисплей
+[ICC_Profile]   Profile Description ML (en-GB)  : Colour LCD
+[ICC_Profile]   Profile Description ML (fr-FR)  : LCD couleur
+[ICC_Profile]   Profile Description ML          : Warna LCD
+[ICC_Profile]   Profile Description ML (hi-IN)  : रंगीन LCD
+[ICC_Profile]   Profile Description ML (th-TH)  : LCD สี
+[ICC_Profile]   Profile Description ML (ca-ES)  : LCD en color
+[ICC_Profile]   Profile Description ML (en-AU)  : Colour LCD
+[ICC_Profile]   Profile Description ML (es-XL)  : LCD color
+[ICC_Profile]   Profile Description ML (de-DE)  : Farb-LCD
+[ICC_Profile]   Profile Description ML          : Color LCD
+[ICC_Profile]   Profile Description ML (pt-BR)  : LCD Colorido
+[ICC_Profile]   Profile Description ML (pl-PL)  : Kolor LCD
+[ICC_Profile]   Profile Description ML (el-GR)  : Έγχρωμη οθόνη LCD
+[ICC_Profile]   Profile Description ML (sv-SE)  : Färg-LCD
+[ICC_Profile]   Profile Description ML (tr-TR)  : Renkli LCD
+[ICC_Profile]   Profile Description ML (pt-PT)  : LCD a cores
+[ICC_Profile]   Profile Description ML (ja-JP)  : カラーLCD
+[ICC_Profile]   Profile Copyright               : Copyright Apple Inc., 2026
+[ICC_Profile]   Media White Point               : 0.95045 1 1.08905
+[ICC_Profile]   Red Matrix Column               : 0.51512 0.2412 -0.00105
+[ICC_Profile]   Green Matrix Column             : 0.29198 0.69225 0.04189
+[ICC_Profile]   Blue Matrix Column              : 0.1571 0.06657 0.78407
+[ICC_Profile]   Red Tone Reproduction Curve     : (Binary data 2060 bytes, use -b option to extract)
+[ICC_Profile]   Video Card Gamma                : (Binary data 48 bytes, use -b option to extract)
+[ICC_Profile]   Native Display Info             : (Binary data 62 bytes, use -b option to extract)
+[ICC_Profile]   Make And Model                  : (Binary data 40 bytes, use -b option to extract)
+[ICC_Profile]   Blue Tone Reproduction Curve    : (Binary data 2060 bytes, use -b option to extract)
+[ICC_Profile]   Green Tone Reproduction Curve   : (Binary data 2060 bytes, use -b option to extract)
+[IFD0]          X Resolution                    : 144
+[IFD0]          Y Resolution                    : 144
+[IFD0]          Resolution Unit                 : inches
+[ExifIFD]       User Comment                    : Screenshot
+[ExifIFD]       Exif Image Width                : 882
+[ExifIFD]       Exif Image Height               : 730
+[PNG-pHYs]      Pixels Per Unit X               : 5669
+[PNG-pHYs]      Pixels Per Unit Y               : 5669
+[PNG-pHYs]      Pixel Units                     : meters
+[XMP-x]         XMP Toolkit                     : XMP Core 6.0.0
+[XMP-exif]      Exif Image Height               : 730
+[XMP-exif]      Exif Image Width                : 882
+[XMP-exif]      User Comment                    : Screenshot
+[Composite]     Image Size                      : 882x730
+[Composite]     Megapixels                      : 0.644
