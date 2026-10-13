@@ -3,7 +3,7 @@
 import zipfile
 from pathlib import Path
 
-from . import fileinfo, ooxml, pdf
+from . import eml, fileinfo, ooxml, pdf
 
 # Every result carries all of these, set to None where a format has no such
 # thing. A consistent shape is what makes the JSON and CSV output comparable
@@ -36,6 +36,12 @@ METADATA_FIELDS = [
     "identifier",
     "language",
     "version",
+    "from",
+    "to",
+    "cc",
+    "bcc",
+    "sent",
+    "message_id",
 ]
 
 
@@ -74,6 +80,8 @@ def new_result(path):
         "embedded_objects": None,
         "macros": None,
         "javascript": None,
+        "received": None,
+        "mime_parts": None,
         "warnings": [],
     }
 
@@ -101,6 +109,8 @@ def extract_metadata(path):
 
     if result["type"] == "pdf":
         add_pdf_details(result, path)
+    elif result["type"] == "eml":
+        add_email_details(result, path)
     else:
         add_office_details(result, path)
     return result
@@ -118,6 +128,21 @@ def add_pdf_details(result, path):
     result["hyperlinks"] = details["hyperlinks"]
     result["embedded_objects"] = details["embedded_objects"]
     result["javascript"] = details["javascript"]
+    result["warnings"] += warnings
+
+
+def add_email_details(result, path):
+    """Add what an email holds: headers, delivery path, MIME structure and attachments."""
+    try:
+        details, warnings = eml.inspect(path)
+    except Exception as error:
+        result["warnings"].append(f"could not read the email: {error}")
+        return
+
+    result["metadata"].update(details["metadata"])
+    result["received"] = details["received"]
+    result["mime_parts"] = details["mime_parts"]
+    result["embedded_objects"] = details["embedded_objects"]
     result["warnings"] += warnings
 
 

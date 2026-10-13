@@ -13,6 +13,8 @@ LIST_FIELDS = [
     "embedded_objects",
     "macros",
     "javascript",
+    "received",
+    "mime_parts",
 ]
 
 CSV_COLUMNS = (
@@ -67,6 +69,8 @@ def print_result(result):
     print_list("embedded objects", result["embedded_objects"])
     print_list("macro parts", result["macros"])
     print_list("javascript", result["javascript"])
+    print_list("received (newest first)", result["received"])
+    print_list("mime structure", result["mime_parts"])
     for warning in result["warnings"]:
         print(f"  warning: {warning}")
 
