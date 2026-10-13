@@ -3,7 +3,7 @@
 import zipfile
 from pathlib import Path
 
-from . import eml, fileinfo, ooxml, pdf
+from . import eml, fileinfo, image, ooxml, pdf
 
 # Every result carries all of these, set to None where a format has no such
 # thing. A consistent shape is what makes the JSON and CSV output comparable
@@ -42,6 +42,16 @@ METADATA_FIELDS = [
     "bcc",
     "sent",
     "message_id",
+    "width",
+    "height",
+    "camera_make",
+    "camera_model",
+    "lens",
+    "orientation",
+    "gps_latitude",
+    "gps_longitude",
+    "gps_altitude",
+    "gps_time",
 ]
 
 
@@ -111,6 +121,8 @@ def extract_metadata(path):
         add_pdf_details(result, path)
     elif result["type"] == "eml":
         add_email_details(result, path)
+    elif result["type"] in ("jpeg", "png"):
+        add_image_details(result, path)
     else:
         add_office_details(result, path)
     return result
@@ -143,6 +155,18 @@ def add_email_details(result, path):
     result["received"] = details["received"]
     result["mime_parts"] = details["mime_parts"]
     result["embedded_objects"] = details["embedded_objects"]
+    result["warnings"] += warnings
+
+
+def add_image_details(result, path):
+    """Add an image's size, camera, dates and GPS position."""
+    try:
+        details, warnings = image.inspect(path)
+    except Exception as error:
+        result["warnings"].append(f"could not read the image: {error}")
+        return
+
+    result["metadata"].update(details["metadata"])
     result["warnings"] += warnings
 
 

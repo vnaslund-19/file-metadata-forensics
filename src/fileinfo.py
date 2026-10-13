@@ -21,6 +21,9 @@ SUPPORTED_EXTENSIONS = {
     ".pptm": "pptx",
     ".pdf": "pdf",
     ".eml": "eml",
+    ".jpg": "jpeg",
+    ".jpeg": "jpeg",
+    ".png": "png",
 }
 
 READ_SIZE = 65536
