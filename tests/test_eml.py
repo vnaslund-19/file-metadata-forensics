@@ -9,7 +9,7 @@ import unittest
 from email.message import EmailMessage
 from pathlib import Path
 
-from src import eml, scan
+from metadata_forensics import eml, scan
 
 
 def write_email(folder, name="test.eml", **headers):

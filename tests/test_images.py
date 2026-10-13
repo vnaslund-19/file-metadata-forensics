@@ -10,7 +10,7 @@ from pathlib import Path
 
 from PIL import ExifTags, Image, PngImagePlugin
 
-from src import image, scan
+from metadata_forensics import image, scan
 
 TAGS = ExifTags.Base
 GPS = ExifTags.GPS

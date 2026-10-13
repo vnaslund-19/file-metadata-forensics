@@ -1,4 +1,4 @@
-"""Entry point for ``python -m src``."""
+"""Entry point for ``python -m metadata_forensics``."""
 
 from .cli import main
 
